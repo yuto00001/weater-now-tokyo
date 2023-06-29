@@ -25,8 +25,7 @@ export default {
   methods: {
     collationHour() {
       const nowHourInt = parseInt(this.nowHour)
-      const matchingHour = this.weatherData.find(hour => hour === nowHourInt)
-
+      const matchingHour = this.weatherData[nowHourInt]
       if (matchingHour !== undefined) {
         console.log('collationHour success', matchingHour)
         return matchingHour;
@@ -44,7 +43,7 @@ export default {
       .then(response => {
         console.log('response.data.hourly.weathercode', response.data.hourly.weathercode)
         this.weatherData = response.data.hourly.weathercode;
-        this.nowHour = format(new Date(), "k")
+        this.nowHour = format(new Date(), "k時")
         this.collationHour()
         const collation = this.collationHour()
         this.nowWeatherCode = collation
