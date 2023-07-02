@@ -22,8 +22,6 @@ WMO気象解釈コード(WW)
 値を抜き取る。 = nowWeatherCode
 
 抜き取った値(matchingHour)をif文に当てて、状態を選別。
-❗️nowWeatherCodeの値（1-3）によって異なるlogを出力するようにしたい。
-その場合、nowWeatherCodeが1-3のどの値かをif文で調べて、その中に異なるlogを出力するコードを記述すれば良い？
 
 
 
