@@ -38,7 +38,6 @@ export default {
   async created() {
     console.log("Created method started")
     console.log(format(new Date(), 'k時'))
-    // => 2022年6月3日
     axios.get('https://api.open-meteo.com/v1/forecast?latitude=35.69&longitude=139.69&hourly=weathercode&forecast_days=1&timezone=Asia%2FTokyo')
       .then(response => {
         console.log('response.data.hourly.weathercode', response.data.hourly.weathercode)
@@ -46,17 +45,28 @@ export default {
         this.nowHour = format(new Date(), "k時")
         this.collationHour()
         const collation = this.collationHour()
-        this.nowWeatherCode = collation
+        const weather = this.nowWeatherCode
+        this.weather = collation
 
-        //todo  できてるやん！！ log部分をthis.methodにして、それぞれのmethodでアニメーションを実装すれば良い
-        if (this.nowWeatherCode === 1) {
-          console.log('Weather code is 1');
-        } else if (this.nowWeatherCode === 2) {
-          console.log('Weather code is 2');
-        } else if (this.nowWeatherCode === 3) {
-          console.log('Weather code is 3');
+        //todo  照合完了。ifのなかでmethodを呼び、処理を進める。
+        if (weather === 0 || weather === 1) {
+          console.log('晴れ');
+        } else if (weather === 2 || weather === 3) {
+          console.log('曇り');
+        } else if (weather === 51 || weather === 53 || weather === 55 || weather === 56 || weather === 57) {
+          console.log('霧雨');
+        } else if (weather === 61 || weather === 63 || weather === 65 || weather === 66 || weather === 67) {
+          console.log('雨');
+        } else if (weather === 71 || weather === 73 || weather === 75 || weather === 77) {
+          console.log('降雪');
+        } else if (weather === 81 || weather === 82 || weather === 83) {
+          console.log('にわか雨');
+        } else if (weather === 85 || weather === 86) {
+          console.log('にわか雪');
+        } else if (weather === 95 || weather === 96 || weather === 99) {
+          console.log('雷雨');
         } else {
-          console.log('Weather code is not 1, 2, or 3');
+          console.log('曇り');
         }
 
       })
